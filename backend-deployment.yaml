@@ -17,7 +17,7 @@ spec:
       - name: regcred       # <---
       containers:
       - name: backend-container
-        image: devpablito2023/landing-backend:v1.0 # ¡Usa tu imagen!
+        image: devpablito2023/landing-backend:v1.3 # ¡Usa tu imagen!
         ports:
         - containerPort: 3000
         envFrom:
