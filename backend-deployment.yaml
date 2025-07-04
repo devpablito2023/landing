@@ -13,9 +13,11 @@ spec:
       labels:
         app: backend
     spec:
+      imagePullSecrets:   # <--- AÑADE ESTA SECCIÓN
+      - name: regcred       # <---
       containers:
       - name: backend-container
-        image: tu-usuario-dockerhub/landing-backend:v1.0 # ¡Usa tu imagen!
+        image: devpablito2023/landing-backend:v1.0 # ¡Usa tu imagen!
         ports:
         - containerPort: 3000
         envFrom:
