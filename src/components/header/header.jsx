@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useTheme } from "../../context/ThemeContext";
-import logo from "../../assets/logo.png";
+//import logo from "../../assets/logo.png";
+const logo = '/Logo.png'; 
 
 const Header = () => {
   const { themeOptions, updateTheme } = useTheme();
