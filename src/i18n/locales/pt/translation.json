@@ -1,0 +1,31 @@
+{
+  "footer": {
+    "copyright": "© {{year}} ZGroup. Todos os direitos reservados.",
+    "socialLinks": "Links sociais",
+    "twitter": "Twitter",
+    "github": "GitHub",
+    "instagram": "Instagram",
+    "facebook": "Facebook"
+  },
+  "theme": {
+    "customizer": "Personalizador de tema",
+    "light": "Claro",
+    "dark": "Escuro",
+    "system": "Sistema",
+    "mode": "Modo",
+    "modeDescription": "Selecione o modo de exibição",
+    "language": "Idioma",
+    "languageDescription": "Selecione seu idioma preferido",
+    "color": "Cor",
+    "colorDescription": "Escolha um esquema de cores",
+    "font": "Fonte",
+    "fontDescription": "Selecione o estilo da fonte"
+  },
+  "languages": {
+    "es": "Espanhol",
+    "en": "Inglês",
+    "fr": "Francês",
+    "de": "Alemão",
+    "pt": "Português"
+  }
+}
