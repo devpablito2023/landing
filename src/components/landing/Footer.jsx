@@ -6,8 +6,8 @@ import {
   MapPinIcon,
   ChevronUpIcon,
 } from "@heroicons/react/24/outline";
-import logo from "../../assets/logo.png";
-
+//import logo from "../../assets/logo.png";
+const logo = '/Logo.png'; 
 const Footer = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const currentYear = new Date().getFullYear();
