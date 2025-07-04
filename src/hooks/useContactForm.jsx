@@ -15,7 +15,8 @@ export const useContactForm = () => {
 
   const submitForm = async (data) => {
     // Para Vite usa import.meta.env, para CRA usa process.env
-    const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+    //const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+    const API_URL = "/api"; // ¡MUY IMPORTANTE!
     const response = await fetch(`${API_URL}/contact`, {
       method: "POST",
       headers: {
