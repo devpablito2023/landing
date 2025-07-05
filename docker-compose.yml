@@ -1,0 +1,72 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # --- Servicio del Frontend (React + Vite) ---
+  landing-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: landing-frontend
+    restart: always
+    ports:
+      # Exponemos el puerto 80 del contenedor al puerto 9999 del HOST
+      # Solo accesible desde el propio servidor (127.0.0.1) para que Nginx lo tome
+      - "127.0.0.1:9999:80"
+    networks:
+      - mindlinkp-net
+
+  # --- Servicio del Backend (Node.js + Express) ---
+  landing-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    container_name: landing-backend
+    restart: always
+    ports:
+      # Exponemos el puerto 3000 del contenedor al puerto 8000 del HOST
+      # Solo accesible desde el propio servidor (127.0.0.1) para Nginx
+      - "127.0.0.1:8000:3000"
+    environment:
+      # Estas variables se conectan a la base de datos de abajo
+      - DB_HOST=landing-db
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=5432
+      # Variables para el envío de email
+      - GMAIL_USER=${GMAIL_USER}
+      - GMAIL_APP_PASSWORD=${GMAIL_APP_PASSWORD}
+      - COMPANY_NAME="MindLinkp"
+    networks:
+      - mindlinkp-net
+    depends_on:
+      # Se asegura de que la base de datos inicie primero
+      - landing-db
+
+  # --- Servicio de la Base de Datos (PostgreSQL) ---
+  landing-db:
+    image: postgres:15-alpine
+    container_name: landing-db
+    restart: always
+    environment:
+      # Estas credenciales deben coincidir con las del backend
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      # Creamos un volumen para que los datos de la DB persistan
+      - landing-db-data:/var/lib/postgresql/data
+    networks:
+      - mindlinkp-net
+    # ¡IMPORTANTE! No se exponen puertos al exterior por seguridad.
+    # El backend se comunica por la red interna 'mindlinkp-net'.
+
+volumes:
+  # Definimos el volumen para la persistencia de datos
+  landing-db-data:
+
+networks:
+  # Definimos la red compartida
+  mindlinkp-net:
+    name: mindlinkp-net
